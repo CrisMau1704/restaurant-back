@@ -1,0 +1,33 @@
+
+### lista de usuarios
+GET http://127.0.0.1:8000/api/usuario
+Accept: application/json
+Authorization: Beaber 14|Kuhm35M0BOEfLBm5qMJcDv8XEsP1G5Kh0LjqcyFP4d699e30
+
+###guardar usuario
+POST http://127.0.0.1:8000/api/usuario
+Accept: application/json
+Content-Type: application/json 
+
+{
+    "name":"cristian",
+    "email":"cristian@gmail.com",
+    "password":"123"
+}
+
+###mostrar usuario
+GET http://127.0.0.1:8000/api/usuario/1
+
+###ACTUALIZAR USUARIO
+PUT http://127.0.0.1:8000/api/usuario/4
+Accept: application/json
+Content-Type: application/json 
+
+{
+    "name":"XIMENAsss",
+    "email":"cris@gmail.com",
+    "password":"123"
+}
+
+###eliminar usuario
+DELETE http://127.0.0.1:8000/api/usuario/5
