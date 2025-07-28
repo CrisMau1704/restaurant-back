@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: laravel-backend
+    env: docker
+    plan: free
+    branch: main
+    buildCommand: ""
+    startCommand: ""
+    autoDeploy: true
