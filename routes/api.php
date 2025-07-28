@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\PedidoPlatoController;
 
+Route::get('/', function() {
+    return response()->json(['message' => 'API funcionando correctamente']);
+});
 
 // Rutas protegidas por middleware de autenticación
 Route::middleware('auth:sanctum')->group(function () {
