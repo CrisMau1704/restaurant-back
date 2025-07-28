@@ -4,6 +4,16 @@ services:
     env: docker
     plan: free
     branch: main
-    buildCommand: ""
-    startCommand: ""
+    dockerfilePath: ./Dockerfile
+    buildCommand: "composer install"
+    startCommand: "php artisan serve --host=0.0.0.0 --port=10000"
     autoDeploy: true
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        value: base64:v56oFJRsFmBOFFWqBokzrKdooP7EyrMltfwvxkWcfZk=
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://restaurant-back-z4n3.onrender.com
