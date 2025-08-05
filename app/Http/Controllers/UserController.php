@@ -9,23 +9,24 @@ class UserController extends Controller
 {
     //index
     public function index(Request $request)
-     {
-         $limit = isset($request->limit) ? $request->limit : 10;
-     
-         if (isset($request->q)) {
-             $usuarios = User::where('name', "like", "%" . $request->q . "%")
-                 ->orderBy("id", "desc")
-                 ->paginate($limit);
-         } else {
-             $usuarios = User::orderBy("id", "desc")->paginate($limit);
-         }
-     
-         // Devuelve la respuesta correcta para paginación
-         return response()->json($usuarios, 200);
-     }
+    {
+        $limit = isset($request->limit) ? $request->limit : 10;
+
+        if (isset($request->q)) {
+            $usuarios = User::where('name', "like", "%" . $request->q . "%")
+                ->orderBy("id", "desc")
+                ->paginate($limit);
+        } else {
+            $usuarios = User::orderBy("id", "desc")->paginate($limit);
+        }
+
+        // Devuelve la respuesta correcta para paginación
+        return response()->json($usuarios, 200);
+    }
 
     //store
-    public function funGuardar(Request $request){
+    public function funGuardar(Request $request)
+    {
         $usuario = new User();
         $usuario->name = $request->name;
         $usuario->email = $request->email;
@@ -36,17 +37,16 @@ class UserController extends Controller
     }
 
     //show
-    public function funMostrar($id){
+    public function funMostrar($id)
+    {
 
         $user = User::find($id);
         return response()->json($user, 200);
-    
-
-        
     }
 
     //update
-    public function funModificar(Request $request, $id){
+    public function funModificar(Request $request, $id)
+    {
         $usuario = User::find($id);
         $usuario->name = $request->name;
         $usuario->email = $request->email;
@@ -54,14 +54,18 @@ class UserController extends Controller
         $usuario->update();
 
         return response()->json(["mensaje" => "Usuario actualizado correctamente"], 201);
-    
     }
 
     //destroy
-    public function funEliminar($id){
+    public function funEliminar($id)
+    {
         $usuario = User::find($id);
         $usuario->delete();
         return response()->json(["mensaje" => "Usuario eliminado correctamente"], 200);
-    
+    }
+
+    public function vendedores()
+    {
+        return User::select('id', 'name')->get();
     }
 }

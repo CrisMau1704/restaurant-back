@@ -11,12 +11,15 @@ use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\PlatoController;
 use App\Http\Controllers\TareaController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\PedidoPlatoController;
+use App\Http\Controllers\Reportes\PeriodoController;
 
-Route::get('/', function() {
+
+Route::get('/', function () {
     return response()->json(['message' => 'API funcionando correctamente']);
 });
 
@@ -26,6 +29,9 @@ Route::middleware('auth:sanctum')->group(function () {
     //buscar cliente 
     Route::get('/cliente/buscar-cliente', [ClienteController::class, "buscarCliente"]);
     Route::get('/proveedor/buscar-proveedor', [ProveedorController::class, "buscarProveedor"]);
+
+    Route::get('/reportes/periodo', [PeriodoController::class, 'index']);
+    Route::get('/usuarios/vendedores', [UserController::class, 'vendedores']);
 
 
 
@@ -47,6 +53,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/cliente', ClienteController::class);
     Route::apiResource('/proveedor', ProveedorController::class);
 
+
+
     Route::apiResource('/area', AreaController::class);
 
 
@@ -61,19 +69,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/productos/{id}/descontar', [ProductoController::class, 'descontarStock']);
     Route::get('platos/{id}/productos', [PlatoController::class, 'getProductosPorPlato']);
 
-    
+
     Route::post('/pedido/{pedidoId}/platos', [PedidoPlatoController::class, 'store']);
 
     // routes/api.php
     Route::get('plato/categoria/{categoriaId}', [PlatoController::class, 'platosPorCategoria']);
-
-
-
-
-
-
-
-
 });
 
 Route::prefix("v1/auth")->group(function () {
